@@ -5,7 +5,7 @@ var world: Node2D:
 	get:
 		return get_tree().get_first_node_in_group(&"World")
 
-var tiles_root: Node:
+var tiles_root: TileMapLayer:
 	get:
 		return world.get_node(^"Tiles")
 

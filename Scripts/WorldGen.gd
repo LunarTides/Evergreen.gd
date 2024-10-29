@@ -1,6 +1,6 @@
 extends Node
 
-const DIRT: EvergreenTileData = preload("res://Resources/Tiles/Dirt.tres")
+const DIRT: int = 0
 
 var rng = RandomNumberGenerator.new()
 
