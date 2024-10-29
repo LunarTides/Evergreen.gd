@@ -17,10 +17,8 @@ static func dig(coords: Vector2i) -> void:
 		return
 	
 	var item_to_drop: ItemData = tile_data.get_custom_data("ItemToDrop")
-	if not item_to_drop:
-		return
-	
-	var item: Item = ITEM.instantiate()
-	item.data = item_to_drop
-	item.global_position = coords * 16
-	Game.world.add_child(item)
+	if item_to_drop:
+		var item: Item = ITEM.instantiate()
+		item.data = item_to_drop
+		item.global_position = coords * 16
+		Game.world.add_child(item)

@@ -9,7 +9,13 @@
 [node name="Player" parent="." instance=ExtResource("1_3crbf")]
 position = Vector2(624, 336)
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(16, 24)
+
 [node name="Tiles" type="TileMapLayer" parent="."]
 tile_set = ExtResource("2_xdout")
 
-[node name="UI" parent="." instance=ExtResource("3_6yfxb")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("3_6yfxb")]
+size_flags_horizontal = 0

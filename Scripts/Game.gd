@@ -22,10 +22,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if is_mouse_holding:
-		var mouse_position = get_viewport().get_mouse_position()
-		var mouse_coords = tiles_root.local_to_map(mouse_position)
-		
-		Tile.dig(mouse_coords)
+		Tile.dig(mouse_to_world_coords())
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -45,3 +42,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			"F1": print_debug("Debug 1")
 			"F2": print_debug("Debug 2")
 			"F3": print_debug("Debug 3")
+
+
+func mouse_to_world_position() -> Vector2:
+	var camera: Camera2D = Player.instance.get_node(^"Camera2D")
+	return camera.get_global_mouse_position()
+
+
+func mouse_to_world_coords() -> Vector2i:
+	var mouse_position = mouse_to_world_position()
+	return tiles_root.local_to_map(mouse_position)

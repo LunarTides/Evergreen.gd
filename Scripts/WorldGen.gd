@@ -12,6 +12,6 @@ func generate_world(seed: int) -> void:
 
 
 func generate_debug_ground() -> void:
-	for i in range(40, 45):
-		for v in range(0, 80):
+	for i in range(32, 64):
+		for v in range(-256, 256):
 			Tile.create(DIRT, Vector2(v, i))
