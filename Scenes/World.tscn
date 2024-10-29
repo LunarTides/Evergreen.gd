@@ -1,22 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3g334gulc6dh"]
+[gd_scene load_steps=4 format=3 uid="uid://d3g334gulc6dh"]
 
 [ext_resource type="PackedScene" uid="uid://cbuiwjd7ochm7" path="res://Scenes/Player.tscn" id="1_3crbf"]
-[ext_resource type="Texture2D" uid="uid://c8i83s3d3qhl1" path="res://Assets/Tiles/Dirt.png" id="2_nndm7"]
+[ext_resource type="TileSet" uid="uid://c2xx0x25u84mp" path="res://Resources/TileSets/Tiles.tres" id="2_xdout"]
 [ext_resource type="PackedScene" uid="uid://cgv1ph7t0tjag" path="res://Scenes/UI.tscn" id="3_6yfxb"]
-[ext_resource type="Resource" uid="uid://blcl53llghjdh" path="res://Resources/Items/Dirt.tres" id="5_slfsl"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8a0or"]
-texture = ExtResource("2_nndm7")
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 8)
-0:0/0/custom_data_0 = ExtResource("5_slfsl")
-
-[sub_resource type="TileSet" id="TileSet_0kjfh"]
-physics_layer_0/collision_layer = 1
-physics_layer_0/collision_mask = 255
-custom_data_layer_0/name = "ItemToDrop"
-custom_data_layer_0/type = 24
-sources/0 = SubResource("TileSetAtlasSource_8a0or")
 
 [node name="World" type="Node2D" groups=["World"]]
 
@@ -24,6 +10,6 @@ sources/0 = SubResource("TileSetAtlasSource_8a0or")
 position = Vector2(624, 336)
 
 [node name="Tiles" type="TileMapLayer" parent="."]
-tile_set = SubResource("TileSet_0kjfh")
+tile_set = ExtResource("2_xdout")
 
 [node name="UI" parent="." instance=ExtResource("3_6yfxb")]

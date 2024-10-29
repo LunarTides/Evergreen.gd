@@ -1,0 +1,17 @@
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://c2xx0x25u84mp"]
+
+[ext_resource type="Resource" uid="uid://blcl53llghjdh" path="res://Resources/Items/Dirt.tres" id="1_sooum"]
+[ext_resource type="Texture2D" uid="uid://c8i83s3d3qhl1" path="res://Assets/Tiles/Dirt.png" id="2_i1ktw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8a0or"]
+texture = ExtResource("2_i1ktw")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 8)
+0:0/0/custom_data_0 = ExtResource("1_sooum")
+
+[resource]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 255
+custom_data_layer_0/name = "ItemToDrop"
+custom_data_layer_0/type = 24
+sources/0 = SubResource("TileSetAtlasSource_8a0or")
