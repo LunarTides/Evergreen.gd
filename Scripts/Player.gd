@@ -8,6 +8,11 @@ var max_speed := 200.0
 var jump_velocity := 400.0
 var terminal_velocity := 400.0
 
+static var instance:
+	get:
+		var tree: SceneTree = Engine.get_main_loop().root.get_tree()
+		return tree.get_first_node_in_group(&"Player")
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

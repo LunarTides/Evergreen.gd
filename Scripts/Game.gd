@@ -9,6 +9,8 @@ var tiles_root: TileMapLayer:
 	get:
 		return world.get_node(^"Tiles")
 
+var is_mouse_holding := false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,10 +21,17 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if is_mouse_holding:
+		var mouse_position = get_viewport().get_mouse_position()
+		var mouse_coords = tiles_root.local_to_map(mouse_position)
+		
+		Tile.dig(mouse_coords)
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action(&"dig"):
+		is_mouse_holding = event.is_pressed()
+	
 	if event.is_released():
 		return
 	

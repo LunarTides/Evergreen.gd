@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvk3hwyrtr8wv"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_241vu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vv85l"]
+size = Vector2(12, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kapfu"]
+radius = 112.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_te750"]
+size = Vector2(32, 32)
+
+[node name="Item" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_241vu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vv85l")
+
+[node name="AttractArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttractArea"]
+shape = SubResource("CircleShape2D_kapfu")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("RectangleShape2D_te750")
+
+[connection signal="body_entered" from="AttractArea" to="." method="_on_attract_area_body_entered"]
+[connection signal="body_exited" from="AttractArea" to="." method="_on_attract_area_body_exited"]
+[connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]
