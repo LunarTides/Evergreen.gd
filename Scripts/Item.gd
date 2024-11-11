@@ -2,6 +2,7 @@ class_name Item
 extends CharacterBody2D
 
 
+const ITEM = preload("res://Scenes/Item.tscn")
 const ATTRACT_SPEED := 7500.0
 
 @export var data: ItemData:
@@ -33,6 +34,12 @@ func _physics_process(delta: float) -> void:
 		velocity.y = minf(velocity.y, terminal_velocity)
 
 	move_and_slide()
+
+
+static func create(data: ItemData) -> Item:
+	var item = ITEM.instantiate()
+	item.data = data
+	return item
 
 
 func conform_to_data() -> void:

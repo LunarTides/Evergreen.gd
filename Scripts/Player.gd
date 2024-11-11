@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 
 signal inventory_item_added(item: Item, amount: int, slot: int)
+signal hotbar_slot_changed(old_slot: int, new_slot: int)
 
 
 var acceleration_speed := 10.0
@@ -12,11 +13,31 @@ var jump_velocity := 400.0
 var terminal_velocity := 400.0
 
 var inventory: Dictionary
+var hotbar_slot_selected: int:
+	set(value):
+		var old = hotbar_slot_selected
+		hotbar_slot_selected = value
+		
+		if hotbar_slot_selected != old:
+			hotbar_slot_changed.emit(old, value)
+var selected_item_data: ItemData:
+	get:
+		if inventory.size() <= hotbar_slot_selected:
+			return null
+		
+		return inventory[hotbar_slot_selected].item_data
+var is_mouse_holding := false
 
 static var instance:
 	get:
 		var tree: SceneTree = Engine.get_main_loop().root.get_tree()
 		return tree.get_first_node_in_group(&"Player")
+
+
+func _process(delta: float) -> void:
+	if is_mouse_holding:
+		if selected_item_data && selected_item_data.type == ItemData.Type.Tool:
+			Tile.dig(Game.mouse_to_world_coords())
 
 
 func _physics_process(delta: float) -> void:
@@ -44,6 +65,19 @@ func _physics_process(delta: float) -> void:
 	velocity.y = minf(velocity.y, terminal_velocity)
 
 	move_and_slide()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action(&"dig"):
+		is_mouse_holding = event.is_pressed()
+	
+	if event.is_released():
+		return
+	
+	var key := event.as_text()
+	
+	if key.is_valid_int():
+		hotbar_slot_selected = int(key) - 1
 
 
 func add_to_inventory(item: Item, amount: int) -> int:

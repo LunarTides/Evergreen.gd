@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://drvwfcu3tyx1f"]
+
+[ext_resource type="Script" path="res://Scripts/ItemData.gd" id="1_127hh"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2nfdo"]
+load_path = "res://.godot/imported/Debug.png-e32a9c8d20cb639600f6740cd8aafb0a.ctex"
+
+[resource]
+script = ExtResource("1_127hh")
+type = 1
+texture = SubResource("CompressedTexture2D_2nfdo")
+max_stack = 1
+required_tool = 0
+minimum_mining_strength = 0
+mining_strength = 1

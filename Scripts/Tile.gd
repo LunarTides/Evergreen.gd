@@ -10,6 +10,7 @@ static func create(source_id: int, coords: Vector2i) -> void:
 
 
 static func dig(coords: Vector2i) -> void:
+	# TODO: Check if the player's tool can mine this block.
 	var tile_data := Game.tiles_root.get_cell_tile_data(coords)
 	Game.tiles_root.erase_cell(coords)
 	

@@ -9,8 +9,6 @@ var tiles_root: TileMapLayer:
 	get:
 		return world.get_node(^"Tiles")
 
-var is_mouse_holding := false
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,16 +17,8 @@ func _ready() -> void:
 	WorldGen.generate_world(seed)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if is_mouse_holding:
-		Tile.dig(mouse_to_world_coords())
-
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action(&"dig"):
-		is_mouse_holding = event.is_pressed()
-	
 	if event.is_released():
 		return
 	
@@ -39,7 +29,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if OS.is_debug_build():
 		match key:
-			"F1": print_debug("Debug 1")
+			"F1":
+				# TODO: Add a debug menu where you can give yourself any item.
+				const DEBUG_PICKAXE = preload("res://Resources/Items/DebugPickaxe.tres")
+				var pickaxe = Item.create(DEBUG_PICKAXE)
+				
+				Player.instance.add_to_inventory(pickaxe, 1)
 			"F2": print_debug("Debug 2")
 			"F3": print_debug("Debug 3")
 
