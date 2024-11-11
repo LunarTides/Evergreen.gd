@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgv1ph7t0tjag"]
+[gd_scene load_steps=2 format=3 uid="uid://cgv1ph7t0tjag"]
 
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="1_2nmgg"]
-[ext_resource type="PackedScene" uid="uid://pfywk00q10wx" path="res://Scenes/UI/ItemFrame.tscn" id="2_3cuo7"]
 
 [node name="UI" type="Control"]
 top_level = true
@@ -21,7 +20,4 @@ text = "FPS: "
 
 [node name="Inventory" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
-
-[node name="ItemFrame" parent="VBoxContainer/Inventory" instance=ExtResource("2_3cuo7")]
 layout_mode = 2

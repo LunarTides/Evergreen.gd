@@ -47,13 +47,25 @@ func _physics_process(delta: float) -> void:
 
 
 func add_to_inventory(item: Item, amount: int) -> int:
-	# TODO: Make this smarter
+	# Check if the inventory already has this item.
+	for i in inventory.keys():
+		var stack: Dictionary = inventory[i]
+		var new_item: ItemData = stack.item_data
+		
+		if item.data == new_item:
+			stack.count += amount
+			inventory_item_added.emit(item, amount, i)
+			return i
+	
+	# The inventory doesn't have the item. Add it to a new slot.
+	# TODO: Limit this to however many inventory slots.
 	var slot = inventory.keys().size()
 	if inventory.size() <= slot:
-		inventory[slot] = []
+		inventory[slot] = {}
 	
 	for i in amount:
-		inventory[slot].append(item)
+		inventory[slot].item_data = item.data
+		inventory[slot].count = amount
 	
 	inventory_item_added.emit(item, amount, slot)
 	return slot
