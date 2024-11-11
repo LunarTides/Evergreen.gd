@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 
 signal inventory_item_added(item: Item, amount: int, slot: int)
+signal inventory_item_removed(item_data: ItemData, amount: int, slot: int)
 signal hotbar_slot_changed(old_slot: int, new_slot: int)
 
 
@@ -22,7 +23,7 @@ var hotbar_slot_selected: int:
 			hotbar_slot_changed.emit(old, value)
 var selected_item_data: ItemData:
 	get:
-		if inventory.size() <= hotbar_slot_selected:
+		if inventory.size() - 1 < hotbar_slot_selected:
 			return null
 		
 		return inventory[hotbar_slot_selected].item_data
@@ -36,8 +37,24 @@ static var instance:
 
 func _process(delta: float) -> void:
 	if is_mouse_holding:
-		if selected_item_data && selected_item_data.type == ItemData.Type.Tool:
-			Tile.dig(Game.mouse_to_world_coords())
+		var coords = Game.mouse_to_world_coords()
+		
+		if selected_item_data:
+			if selected_item_data.type == ItemData.Type.Tool:
+				Tile.dig(coords)
+			
+			if selected_item_data.type == ItemData.Type.Block:
+				if Game.tiles_root.get_cell_tile_data(coords):
+					return
+				
+				# TODO: Somehow get the source id of the selected item. This will just place dirt.
+				Tile.create(0, coords)
+				
+				inventory[hotbar_slot_selected].count -= 1
+				inventory_item_removed.emit(selected_item_data, 1, hotbar_slot_selected)
+				
+				if inventory[hotbar_slot_selected].count <= 0:
+					inventory.erase(hotbar_slot_selected)
 
 
 func _physics_process(delta: float) -> void:
