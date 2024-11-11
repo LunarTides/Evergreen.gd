@@ -2,3 +2,4 @@ class_name ItemData
 extends Resource
 
 @export var texture: Texture2D
+@export var max_stack: int

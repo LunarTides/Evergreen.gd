@@ -52,7 +52,7 @@ func add_to_inventory(item: Item, amount: int) -> int:
 		var stack: Dictionary = inventory[i]
 		var new_item: ItemData = stack.item_data
 		
-		if item.data == new_item:
+		if item.data == new_item && stack.count < new_item.max_stack:
 			stack.count += amount
 			inventory_item_added.emit(item, amount, i)
 			return i

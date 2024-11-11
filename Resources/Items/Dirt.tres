@@ -6,3 +6,4 @@
 [resource]
 script = ExtResource("1_8owld")
 texture = ExtResource("2_oncx0")
+max_stack = 9999
