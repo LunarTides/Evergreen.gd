@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cbuiwjd7ochm7" path="res://Scenes/Player.tscn" id="1_3crbf"]
 [ext_resource type="TileSet" uid="uid://c2xx0x25u84mp" path="res://Resources/TileSets/Tiles.tres" id="2_xdout"]
-[ext_resource type="PackedScene" uid="uid://cgv1ph7t0tjag" path="res://Scenes/UI.tscn" id="3_6yfxb"]
+[ext_resource type="PackedScene" uid="uid://cgv1ph7t0tjag" path="res://Scenes/UI/UI.tscn" id="3_6yfxb"]
 
 [node name="World" type="Node2D" groups=["World"]]
 

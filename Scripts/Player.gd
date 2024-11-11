@@ -2,11 +2,16 @@ class_name Player
 extends CharacterBody2D
 
 
+signal inventory_item_added(item: Item, amount: int, slot: int)
+
+
 var acceleration_speed := 10.0
 var deceleration_speed := 30.0
 var max_speed := 200.0
 var jump_velocity := 400.0
 var terminal_velocity := 400.0
+
+var inventory: Dictionary
 
 static var instance:
 	get:
@@ -39,3 +44,16 @@ func _physics_process(delta: float) -> void:
 	velocity.y = minf(velocity.y, terminal_velocity)
 
 	move_and_slide()
+
+
+func add_to_inventory(item: Item, amount: int) -> int:
+	# TODO: Make this smarter
+	var slot = inventory.keys().size()
+	if inventory.size() <= slot:
+		inventory[slot] = []
+	
+	for i in amount:
+		inventory[slot].append(item)
+	
+	inventory_item_added.emit(item, amount, slot)
+	return slot

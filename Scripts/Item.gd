@@ -50,5 +50,5 @@ func _on_attract_area_body_exited(body: Node2D) -> void:
 
 
 func _on_pickup_area_body_entered(body: Node2D) -> void:
-	# TODO: Pickup.
+	Player.instance.add_to_inventory(self, 1)
 	queue_free()

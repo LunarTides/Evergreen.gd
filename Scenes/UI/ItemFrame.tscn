@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://pfywk00q10wx"]
+
+[ext_resource type="Texture2D" uid="uid://bicq07c215t6t" path="res://Assets/UI/ItemFrame.png" id="1_t04mq"]
+[ext_resource type="Texture2D" uid="uid://b7u0sm4skd73y" path="res://Assets/Player.png" id="2_10vjw"]
+
+[node name="ItemFrame" type="TextureRect"]
+texture = ExtResource("1_t04mq")
+stretch_mode = 2
+
+[node name="Item" type="TextureRect" parent="."]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("2_10vjw")
+expand_mode = 1
